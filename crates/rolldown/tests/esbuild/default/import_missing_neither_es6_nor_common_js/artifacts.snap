@@ -1,6 +1,29 @@
 ---
 source: crates/rolldown_testing/src/integration_test.rs
 ---
+# warnings
+
+## SHIMMED_EXPORT
+
+```text
+[SHIMMED_EXPORT] Missing export "default" has been shimmed in module "foo.js".
+
+```
+
+## SHIMMED_EXPORT
+
+```text
+[SHIMMED_EXPORT] Missing export "x" has been shimmed in module "foo.js".
+
+```
+
+## SHIMMED_EXPORT
+
+```text
+[SHIMMED_EXPORT] Missing export "y" has been shimmed in module "foo.js".
+
+```
+
 # Assets
 
 ## bare.js

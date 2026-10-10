@@ -120,7 +120,9 @@ Both collapse paths register a synthetic namespace declaration and its runtime d
 
 An `exports-only` entry with dynamic star exports requires a strict signature even when it has no statically known export names.
 
-Missing-export shims are part of the module's public interface. `bind_imports_and_exports` adds them to `resolved_exports` before collecting canonical exports, so entry-signature checks, namespace generation, and export naming all use their original export names.
+Missing-export shims are part of the module's public interface. `bind_imports_and_exports` registers named-import shims, discovers missing static namespace members, and propagates the synthesized names through star re-exports before collecting canonical exports. Entry-signature checks, namespace generation, and export naming all use that interface. Creation emits one `SHIMMED_EXPORT` warning per module/name when `shimMissingExports` is enabled; implicit empty-module shims remain silent. Public entries and observed namespaces retain their shim names even when the requesting import binding is unused.
+
+Star propagation runs after declared exports have been resolved. Shims cannot replace real exports or resolve genuine ambiguities. A module's own shim shadows star fallbacks; among fallback paths, the first path in source order supplies the `undefined` binding. The traversal excludes default exports, honors explicit exports, handles cycles, and records the selected path for strict execution order.
 
 `compute_wrapped_esm_init_metadata` produces a sparse `Sealed<FinalEsmInitMetadata>`: absence of a module entry means the default no-op/empty-target values, not absence of a wrapper. `Sealed<T>` has a private field and constructor, exposes only `Deref`, and offers neither `DerefMut` nor an unwrap operation. Final cross-chunk linking and module finalization consume the same result for the completed topology. The earlier `predicted_static_import_edges` pass explicitly marks final metadata unavailable instead of manufacturing an empty sealed artifact; its Project-mode obligation traversal remains separate and conservative.
 

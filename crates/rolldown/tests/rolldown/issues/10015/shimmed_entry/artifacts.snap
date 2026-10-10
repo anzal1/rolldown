@@ -1,6 +1,29 @@
 ---
 source: crates/rolldown_testing/src/integration_test.rs
 ---
+# warnings
+
+## SHIMMED_EXPORT
+
+```text
+[SHIMMED_EXPORT] Missing export "a-b" has been shimmed in module "entry.js".
+
+```
+
+## SHIMMED_EXPORT
+
+```text
+[SHIMMED_EXPORT] Missing export "default" has been shimmed in module "entry.js".
+
+```
+
+## SHIMMED_EXPORT
+
+```text
+[SHIMMED_EXPORT] Missing export "unused" has been shimmed in module "entry.js".
+
+```
+
 # Assets
 
 ## dynamic.js
